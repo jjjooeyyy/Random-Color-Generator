@@ -1,37 +1,10 @@
-/* const colorBox = document.getElementById("color-box");
-const colorHex = document.getElementById("color-hex");
-const generateButton = document.getElementById("generate-button");
 
-function generateColor() {
-  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-  const hexCode = "#" + randomColor;
-  colorBox.style.backgroundColor = hexCode;
-  colorHex.textContent = hexCode;
-  document.documentElement.style.backgroundColor = hexCode;
-}
-
-function copyColor() {
-  const hexCode = colorHex.textContent;
-  const textarea = document.createElement("textarea");
-  textarea.value = hexCode;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textarea);
-}
-
-generateButton.addEventListener("click", generateColor);
-
-colorHex.addEventListener("click", function() {
-  copyColor();
-});
- */
 
 "use strict"
 
 let choice = "0123456789ABCDEF"; 
 let color = "#";
-
+const popMsg = document.querySelector('#pop-msg');
 
 // Add click action
 document.querySelector('button').addEventListener('click', generateColor);
@@ -46,6 +19,23 @@ function generateColor() {
            color = color + choice[(Math.floor(Math.random()*16))]; // random 16 choices between the choice string
           }
 
-   document.querySelector('#color').textContent = `Background Color : ${color}`;
-    document.querySelector('body').style.backgroundColor = color;
+   document.querySelector('span').textContent = color;
+   document.querySelector('body').style.backgroundColor = color;
+   popMsg.textContent = '';
 }
+
+// Use Clipboard API to copy hexcode on click!
+async function copyHexCode() {
+const color = document.querySelector('span').textContent;
+try {
+  await navigator.clipboard.writeText(color);
+  console.log(`Copied ${color} to clipboard!`);
+  popMsg.textContent = `${color} is copied to your clipboard! Try it now 🎨`
+} catch (error) {
+  console.error(`Error copying ${color} to clipboard: ${error}`);
+}
+}
+
+document.querySelector('span').addEventListener('click', function() {
+  copyHexCode();
+})
