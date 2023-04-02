@@ -3,7 +3,7 @@
 **- You can also click on the HEX code and it will be copied automatically to your clipboard**
 
 ## Live Site URL
-- (color-ideas-generator.netlify.app)
+- [Try It Now!](https://color-ideas-generator.netlify.app/)
 
 ## Built with
 - Semantic HTML5 markup
